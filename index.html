@@ -108,12 +108,18 @@
 		}
 
 		.eyebrow {
+			display: inline-block;
 			margin: 0 0 18px;
-			color: var(--accent);
+			padding: 7px 12px;
+			color: #0a1020;
+			background: linear-gradient(135deg, #ffd166, #ff8c42);
+			border: 1px solid rgba(255, 255, 255, .2);
+			border-radius: 999px;
 			font-size: .76rem;
 			font-weight: 800;
 			letter-spacing: .14em;
 			text-transform: uppercase;
+			box-shadow: 0 0 22px rgba(255, 146, 76, .28);
 		}
 
 		h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
@@ -227,43 +233,63 @@
 			font-size: .82rem;
 		}
 
-		.threat.topic-malware:nth-child(1) { background: #f8e2dc; }
-		.threat.topic-malware:nth-child(2) { background: #dce9df; }
-		.threat.topic-malware:nth-child(3) { background: #e4e0f0; }
-		.threat.topic-malware:nth-child(4) { background: #f2e7c9; }
-		.threat.topic-malware:nth-child(5) { background: #dce8ef; }
-		.threat.topic-malware:nth-child(6) { background: #eee0d5; }
-		.threat.topic-network:nth-child(1) { background: #f4d5d1; }
-		.threat.topic-network:nth-child(2) { background: #dfeee5; }
-		.threat.topic-network:nth-child(3) { background: #dee8f7; }
+		.threat.topic-malware:nth-child(1) { background-color: #f8e2dc; background-image: linear-gradient(135deg, #ffd9d2, #f3b3a6); }
+		.threat.topic-malware:nth-child(2) { background-color: #dce9df; background-image: linear-gradient(135deg, #dff7e3, #bddfc4); }
+		.threat.topic-malware:nth-child(3) { background-color: #e4e0f0; background-image: linear-gradient(135deg, #ece7ff, #d9d3ff); }
+		.threat.topic-malware:nth-child(4) { background-color: #f2e7c9; background-image: linear-gradient(135deg, #fff0c2, #f4cf77); }
+		.threat.topic-malware:nth-child(5) { background-color: #dce8ef; background-image: linear-gradient(135deg, #deefff, #b8d9f7); }
+		.threat.topic-malware:nth-child(6) { background-color: #eee0d5; background-image: linear-gradient(135deg, #ffe7d5, #f7c9a7); }
+		.threat.topic-network:nth-child(1) { background-color: #f4d5d1; background-image: linear-gradient(135deg, #ffd7d1, #f3b6b0); }
+		.threat.topic-network:nth-child(2) { background-color: #dfeee5; background-image: linear-gradient(135deg, #def5e8, #aee0c6); }
+		.threat.topic-network:nth-child(3) { background-color: #e3e8fb; background-image: linear-gradient(135deg, #e9e3ff, #cfdafc); }
+		.threat.ud3a1-card { background-color: #e3e8fb; background-image: linear-gradient(135deg, #e9e3ff, #cfdafc); }
 
 		.number {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+			gap: 12px;
 			margin-bottom: 34px;
-			color: var(--muted);
+			color: #17252d;
 			font-size: .76rem;
 			font-weight: 800;
 			letter-spacing: .12em;
 		}
 
+		.card-icon {
+			display: grid;
+			width: 38px;
+			height: 38px;
+			place-items: center;
+			border: 1px solid rgba(19, 32, 43, .2);
+			border-radius: 50%;
+			background: rgba(255, 255, 255, .38);
+			font-size: 1.4rem;
+			letter-spacing: 0;
+		}
+
+		.principle-key {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px 16px;
+			margin: 0 0 18px;
+			padding: 12px 14px;
+			color: var(--muted);
+			border: 1px solid var(--line);
+			border-radius: 6px;
+			font-size: .78rem;
+		}
+
+		.principle-key strong { color: var(--ink); }
+
 		.question {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			color: #13202b;
-			font-family: Georgia, "Times New Roman", serif;
-			font-size: 4.2rem;
-			line-height: 1;
-			transform: translate(-50%, -42%);
-			transition: opacity .3s ease, transform .3s ease;
+			display: none;
 		}
 
 		.threat h3, .threat p, .threat .details {
-			opacity: 0;
-			transform: translateY(8px);
-			visibility: hidden;
+			opacity: 1;
+			transform: none;
+			visibility: visible;
 		}
 
 		.threat h3 { margin: 0 0 10px; color: #0f1f2c; font-size: 1.55rem; transition: opacity .35s ease .08s, transform .35s ease .08s, visibility .35s; }
@@ -271,11 +297,16 @@
 		.details { margin-top: 18px; color: #22313d; font-size: .82rem; transition: opacity .35s ease .2s, transform .35s ease .2s, visibility .35s; }
 		.details p { margin: 0 0 10px; font-size: .82rem; }
 		.details strong { color: #13202b; }
+		.reflection { margin-top: 14px !important; padding: 12px; background: rgba(255, 255, 255, .35); border-left: 3px solid #16735d; }
+		.principle-impact { margin: 14px 0; }
+		.principle-impact > p { margin-bottom: 8px; }
+		.principle-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+		.principle-tag { padding: 3px 8px; color: #13202b; background: rgba(255, 255, 255, .52); border: 1px solid rgba(19, 32, 43, .22); border-radius: 999px; font-size: .72rem; }
+		.source { margin-top: 16px !important; padding-top: 12px; border-top: 1px solid rgba(19, 32, 43, .2); }
+		.source a { color: #13202b; font-weight: 700; text-underline-offset: 3px; }
+		.source a:hover, .source a:focus-visible { color: #075b49; }
 		.details ul { margin: 0; padding-left: 18px; }
 		.details li + li { margin-top: 4px; }
-
-		.threat.is-open .question { opacity: 0; transform: translate(-50%, -42%) scale(.7); }
-		.threat.is-open h3, .threat.is-open p, .threat.is-open .details { opacity: 1; transform: translateY(0); visibility: visible; }
 
 		.modal-backdrop {
 			display: grid;
@@ -299,7 +330,8 @@
 			overflow: auto;
 			padding: 42px;
 			color: #13202b;
-			background: var(--modal-color, #f8e2dc);
+			background-color: var(--modal-color, #f8e2dc);
+			background-image: var(--modal-image, none);
 			border: 1px solid rgba(19, 32, 43, .25);
 			border-radius: 8px;
 			box-shadow: 0 24px 80px rgba(0, 0, 0, .35);
@@ -323,6 +355,7 @@
 		.modal-details ul { margin: 0; padding-left: 20px; }
 		.modal-details li + li { margin-top: 6px; }
 		.modal-details strong { color: #13202b; }
+		.modal-details .source { margin-top: 20px; }
 
 		.modal-close {
 			position: absolute;
@@ -399,6 +432,14 @@
 					<h2 id="mehatxu-izenburua">Malware motak</h2>
 					<span>Malwarearen azpitalde nagusiak</span>
 				</div>
+				<p class="principle-key" aria-label="Segurtasun-helburuen azalpena">
+					<strong>Kaltetutako segurtasun-helburu ohikoenak:</strong>
+					<span>Konfidentzialtasuna: datuak isilpean</span>
+					<span>Osotasuna: datuak zuzen eta aldatu gabe</span>
+					<span>Erabilgarritasuna: sistemak eskuragarri</span>
+					<span>Autentifikazioa: identitatea egiaztatzea</span>
+					<span>Ez-gaitestea: ekintzak frogatu ahal izatea</span>
+				</p>
 
 				<div class="threats">
 					<article class="threat topic-malware" tabindex="0" role="button" aria-expanded="false">
@@ -410,6 +451,7 @@
 						<p><strong>Gertakaria:</strong> 2013–2014ean, Google eta Facebook-ek 100 milioi dolarreko iruzur bat jasan zuten funtzionatzen zuten banku-faktura faltsuen phishing kampainaren bidez. Erasotzaileak benetako hornitzaileen itxura ematen zion mezu bati ere itxita zegoen.</p>
 						<strong>Eragiten dituen ezaugarriak:</strong>
 						<ul><li>Posta elektronikoa eta mezularitza</li><li>Saio-hasierak, banku-kontuak eta MFA kodeak</li></ul>
+						<p class="source"><strong>Iturria:</strong> <a href="https://www.justice.gov/usao-sdny/pr/lithuanian-man-pleads-guilty-100-million-fraud-scheme-against-google-and-facebook" target="_blank" rel="noopener noreferrer">AEBetako Justizia Departamentua: Google eta Facebook-en aurkako iruzurra</a></p>
 						</div>
 					</article>
 
@@ -422,6 +464,7 @@
 						<p><strong>Gertakaria:</strong> 2000ko maiatzaren 4an, ILOVEYOU birusa zabaldu zen. E-posta mezu bati erantsitako .vbs fitxategia ireki zenean, 10 milioi ordenagailu inguru kutsatu ziren mundu mailan.</p>
 						<strong>Eragiten dituen ezaugarriak:</strong>
 						<ul><li>Fitxategiak eta e-mailak</li><li>Sistemaren errendimendua, fitxategien osotasuna eta datuak</li></ul>
+						<p class="source"><strong>Iturria:</strong> <a href="https://en.wikipedia.org/wiki/ILOVEYOU" target="_blank" rel="noopener noreferrer">ILOVEYOU birusaren historia</a></p>
 						</div>
 					</article>
 
@@ -434,6 +477,7 @@
 						<p><strong>Gertakaria:</strong> 2021eko urtarrilean, Emotet troiarraren botneta atxilotu zuen FBIk. Troiarra dokumentuak, posta-zorroak eta sareko zerbitzuak erabiliz, pertsona eta erakunde askoren ordenagailuetan ezkutuan sartu zen.</p>
 							<strong>Eragiten dituen ezaugarriak:</strong>
 							<ul><li>Programen instalazioa eta baimenak</li><li>Fitxategiak, kontuak eta sare-konexioak</li></ul>
+							<p class="source"><strong>Iturria:</strong> <a href="https://en.wikipedia.org/wiki/Emotet" target="_blank" rel="noopener noreferrer">Emotet-en historia eta jarduera</a></p>
 						</div>
 					</article>
 
@@ -446,6 +490,7 @@
 						<p><strong>Gertakaria:</strong> 2020ko abenduaren 8an aurkitu zen SolarWinds Orion softwarearen supply-chain ataka. Erasotzaileek backdoor bat txertatu zuten konpainiaren softwarearen eguneratzean, eta 18.000 bezero inguru kutsatu zituzten.</p>
 						<strong>Eragiten dituen ezaugarriak:</strong>
 						<ul><li>Urruneko sarbidea eta administrazio-kontrola</li><li>Sareko zerbitzuak, konfigurazioa eta eguneratzeak</li></ul>
+						<p class="source"><strong>Iturria:</strong> <a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa20-352a" target="_blank" rel="noopener noreferrer">CISA: SolarWinds-en hornikuntza-kateko erasoa</a></p>
 						</div>
 					</article>
 
@@ -455,9 +500,10 @@
 						<h3>Spywarea</h3>
 						<p>Erabiltzailearen jarduera ezkutuan behatzen du: nabigazioa, teklatuaren erabilera edo bestelako datu pribatuak jaso ditzake.</p>
 						<div class="details">
-						<p><strong>Gertakaria:</strong> 2021eko uztailean, Pegasus spywareari buruzko azterlanek 50.000 telefono inguru infektatu zituela salatu zuten. Erasotzaileek teklatuaren jarduera, mezuak eta kokapena behatu ahal izan zituzten, kazetari, politikari eta aktibisten aurka.</p>
+						<p><strong>Gertakaria:</strong> 2021eko uztailean, Pegasus Project ikerketak 50.000 telefono-zenbaki inguru identifikatu zituen spywarearen balizko jomuga gisa; horrek ez du esan nahi guztiak infektatuta zeudenik.</p>
 						<strong>Eragiten dituen ezaugarriak:</strong>
 						<ul><li>Pribatutasuna eta nabigazio-historia</li><li>Mikrofonoa, kamera, mezuak eta teklatuaren jarduera</li></ul>
+						<p class="source"><strong>Iturria:</strong> <a href="https://www.amnesty.org/en/latest/research/2021/07/forensic-methodology-report-how-to-catch-nso-groups-pegasus/" target="_blank" rel="noopener noreferrer">Amnesty International: Pegasus Project-en analisi forentsea</a></p>
 						</div>
 					</article>
 
@@ -470,6 +516,7 @@
 						<p><strong>Gertakaria:</strong> 2020ko maiatzean, RedLine Stealer malwarea zabaldu zen; pasahitzak, cookie-ak eta kriptomoneta-zorroak lapurtzeko diseinatuta zegoen. Erasotzaileek web-garbitokiak eta nabigatzaileak erabiltzen zituzten informazioa ateratzeko.</p>
 						<strong>Eragiten dituen ezaugarriak:</strong>
 						<ul><li>Nabigatzaileak, gordetako pasahitzak eta cookie-ak</li><li>Kriptomoneta-zorroak, sesio-tokenak eta kontu-datuak</li></ul>
+						<p class="source"><strong>Iturria:</strong> <a href="https://www.malwarebytes.com/infostealer" target="_blank" rel="noopener noreferrer">Malwarebytes: infostealers eta kredentzialen lapurreta</a></p>
 						</div>
 					</article>
 				</div>
@@ -490,6 +537,7 @@
 						<p><strong>Gertakaria:</strong> 2008tik 2011ra, Koobface botnet-a sare sozialetan zabaldu zen, batez ere Facebooken. Erasotzaileek bidegabeko estekak eta faltsutako profilak erabili zituzten erabiltzaileak engainatzeko eta gailuak kutsatzeko.</p>
 						<strong>Eragiten dituen ezaugarriak:</strong>
 						<ul><li>Sare sozialak eta profilak</li><li>Pasahitzak, spam-a eta gailuen kontrola</li></ul>
+						<p class="source"><strong>Iturria:</strong> <a href="https://en.wikipedia.org/wiki/Koobface" target="_blank" rel="noopener noreferrer">Koobface-ren historia</a></p>
 						</div>
 					</article>
 
@@ -502,6 +550,7 @@
 						<p><strong>Gertakaria:</strong> 2016an Mirai botnet-a agertu zen, Interneteko gailu ahulek (bideerradadoreak, kamarak, etab.) osatutako sareak eta zerbitzuen aurkako DDoS eraso masiboak egin zituen. Botnetek milaka gailu aldi berean elkartu zitzaketen erasoa koordinatzeko.</p>
 						<strong>Eragiten dituen ezaugarriak:</strong>
 						<ul><li>Interneteko gailuak eta ordenagailuak</li><li>DDoS erasoak, spam-a eta datuen lapurketa</li></ul>
+						<p class="source"><strong>Iturria:</strong> <a href="https://blog.cloudflare.com/inside-mirai-the-infamous-iot-botnet-a-retrospective-analysis/" target="_blank" rel="noopener noreferrer">Cloudflare: Mirai botnet-aren azterketa</a></p>
 						</div>
 					</article>
 
@@ -514,6 +563,101 @@
 						<p><strong>Gertakaria:</strong> 2023an, hainbat online zerbitzu eta aplikazioetan pasahitzak ordena ezberdinetan probatzen zituzten erasoak egon ziren. Jende askok ahulekotasun handia duten pasahitzak erabiltzen dituen kontuak arriskuan jartzen ditu, eta erasotzaileak asko probatzen ditu eskuzko lana saihesteko.</p>
 						<strong>Eragiten dituen ezaugarriak:</strong>
 						<ul><li>Pasahitzak eta identitateak</li><li>Kontuen hartzeak, sarreren lapurketa eta datu-ihesak</li></ul>
+						<p class="source"><strong>Iturria:</strong> <a href="https://en.wikipedia.org/wiki/Brute-force_attack" target="_blank" rel="noopener noreferrer">Indar gordineko erasoaren definizioa</a></p>
+						</div>
+					</article>
+
+				</div>
+			</section>
+
+			<section class="topic-section" aria-labelledby="ud3a1-izenburua">
+				<div class="topic-header">
+					<h2 id="ud3a1-izenburua">UD3A1</h2>
+					<span>Eraso informatiko esanguratsua</span>
+				</div>
+				<div class="threats">
+					<article class="threat topic-network wanna-card ud3a1-card" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>10</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>WannaCry</h3>
+						<p>Ransomwarea da, gailuak zifratzen ditu eta erabiltzaileei zifra-ordainketa eskatu die, Interneteko sare eta zerbitzuetan hedatu daitekeelako.</p>
+						<div class="details">
+						<p><strong>Gertakaria:</strong> 2017ko maiatzean, WannaCry ransomwarea mundu osoan zabaldu zen. 200.000 gailu inguru kutsatu ziren 150 herrialdetan, eta Erresuma Batuko osasun-sistema garrantzitsuenak ere eragin zituen, ospitaleak eta zerbitzu kritikoak atzeratu zituena.</p>
+						<strong>Eragiten dituen ezaugarriak:</strong>
+						<ul><li>Ransomwarea eta zifratzea</li><li>Interneteko gailuak, zerbitzuak eta fitxategiak</li></ul>
+						<p class="source"><strong>Iturria:</strong> <a href="https://www.cisa.gov/news-events/alerts/2017/05/12/indicators-associated-wannacry-ransomware" target="_blank" rel="noopener noreferrer">CISA: WannaCry ransomwarea</a></p>
+						</div>
+					</article>
+				</div>
+			</section>
+			<section class="topic-section" aria-labelledby="ud3a2-izenburua">
+				<div class="topic-header">
+					<h2 id="ud3a2-izenburua">UD3A2</h2>
+					<span>Malware motak, ezaugarriak eta babesa</span>
+				</div>
+				<div class="threats">
+					<article class="threat topic-malware ud3a2-card" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>11</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Troiarrak</h3>
+						<p>Programa legitimo edo erabilgarri baten itxurapean ezkutatzen dira; exekutatzean, erasotzaileari sarbidea edo kontrola eman diezaiokete.</p>
+						<div class="details">
+							<p><strong>Nola hedatzen dira:</strong> Deskarga susmagarrien, P2P fitxategien, eranskin edo esteken eta eguneratu gabeko aplikazioen bidez.</p>
+							<strong>Ezaugarriak eta babesa:</strong>
+							<ul><li>Informazioa lapurtu edo urruneko aginduak exekuta ditzakete.</li><li>Erabili antibirus eguneratua eta suebakia; deskargatu softwarea iturri ofizialetatik eta eguneratu sistema.</li></ul>
+							<p class="source"><strong>Iturria:</strong> <a href="https://csrc.nist.gov/glossary/term/trojan_horse" target="_blank" rel="noopener noreferrer">NIST: troiarra</a></p>
+						</div>
+					</article>
+
+					<article class="threat topic-malware ud3a2-card" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>12</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Deskarga fantasma</h3>
+						<p>Webgune kutsatu bat bisitatzean, kode maltzurrak nabigatzailearen edo sistemaren ahultasunak ustiatu eta malwarea deskarga dezake.</p>
+						<div class="details">
+							<p><strong>Nola gertatzen da:</strong> Gunean txertatutako scriptak gailua aztertzen du eta ahultasun bat aurkituz gero, beste zerbitzari batetik malwarea deskargatzen saiatzen da.</p>
+							<strong>Ezaugarriak eta babesa:</strong>
+							<ul><li>Erabiltzaileak ez du fitxategi bat nahita deskargatu edo ireki behar.</li><li>Eguneratu sistema, nabigatzailea eta aplikazioak; saihestu jatorri susmagarriko webguneak eta estekak.</li></ul>
+							<p class="source"><strong>Iturria:</strong> <a href="https://en.wikipedia.org/wiki/Drive-by_download" target="_blank" rel="noopener noreferrer">Deskarga maltzur automatikoak</a></p>
+						</div>
+					</article>
+
+					<article class="threat topic-malware ud3a2-card" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>13</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Harrak (worms)</h3>
+						<p>Autonomoki hedatzen den malwarea da; sareko ahultasunak edo euskarri kutsatuak baliatuz beste gailu batzuk infektatu ditzake.</p>
+						<div class="details">
+							<p><strong>Eraginak:</strong> Atakak ireki, segurtasun-prozesuak amaitu, fitxategiak deskargatu edo sistema abiaraztean berriro exekutatzeko konfigurazioa alda dezake.</p>
+							<strong>Ezaugarriak eta babesa:</strong>
+							<ul><li>Baliteke sistema moteltzea, huts egitea edo fitxategiak ustekabean agertzea edo desagertzea.</li><li>Instalatu segurtasun-eguneratzeak, mantendu antibirusa eta suebakia eguneratuta, eta kontuz ibili USBekin eta eranskinekin.</li></ul>
+							<p class="source"><strong>Iturria:</strong> <a href="https://csrc.nist.gov/glossary/term/worm" target="_blank" rel="noopener noreferrer">NIST: harra (worm)</a></p>
+						</div>
+					</article>
+
+					<article class="threat topic-malware ud3a2-card" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>14</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Botnetak</h3>
+						<p>Urrunetik kontrolatutako gailu kutsatuen sarea da. Gailu horiei “zonbi” esaten zaie, eta jabea askotan ez da infekzioaz ohartzen.</p>
+						<div class="details">
+							<p><strong>Erabilerak:</strong> Spam-a bidaltzea, phishinga edo malwarea zabaltzea eta DDoS erasoak egitea. Gailuak kontrol-zentroarekin IRC, HTTP edo P2P bidez komunika daitezke.</p>
+							<strong>Ezaugarriak eta babesa:</strong>
+							<ul><li>Internet motelagoa edo bidali gabeko mezuen erantzunak izan daitezke zantzuak.</li><li>Eguneratu sistema eta nabigatzailea, erabili antibirusa eta suebakia, eta saihestu crackak eta iturri ezezaguneko deskargak.</li></ul>
+							<p class="source"><strong>Iturria:</strong> <a href="https://www.cloudflare.com/learning/ddos/glossary/botnet/" target="_blank" rel="noopener noreferrer">Cloudflare: zer da botnet bat?</a></p>
+						</div>
+					</article>
+
+					<article class="threat topic-malware ud3a2-card" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>15</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Atzeko ateak</h3>
+						<p>Sistema batera ohiko autentifikazioa saihestuz sartzeko ezkutuko sarbidea ematen dute; softwarean edo firmwarean egon daitezke.</p>
+						<div class="details">
+							<p><strong>Eraginak:</strong> Erasotzaileak programak exekutatu, konfigurazioa aldatu, fitxategiak edo pasahitzak lapurtu eta gailua urrunetik kontrola dezake.</p>
+							<strong>Ezaugarriak eta babesa:</strong>
+							<ul><li>Eranskin, deskarga susmagarri, software zaharkitu, pasahitz ahul edo irekita dauden sare-ataken bidez baliatu daitezke.</li><li>Eguneratu sistema, erabili pasahitz sendoak, mugatu erabiltzaile-baimenak eta mantendu suebakia aktibatuta.</li></ul>
+							<p class="source"><strong>Iturria:</strong> <a href="https://csrc.nist.gov/glossary/term/backdoor" target="_blank" rel="noopener noreferrer">NIST: atzeko atea (backdoor)</a></p>
 						</div>
 					</article>
 				</div>
@@ -538,7 +682,122 @@
 			const modalDetails = document.querySelector('.modal-details');
 			let activeCard = null;
 
+			const cardGuidance = {
+				'01': {
+					icon: '🎣',
+					reflection: 'Egiaztatu igorlearen helbidea eta webgunearen URLa, eta ez eman pasahitzik edo MFA koderik mezu bidez. Datuak eman badituzu, aldatu pasahitza gailu fidagarri batetik, itxi saioak eta jarri harremanetan bankuarekin edo erakundearen IT taldearekin.',
+					principles: ['Konfidentzialtasuna', 'Autentifikazioa', 'Ez-gaitestea']
+				},
+				'02': {
+					icon: '🦠',
+					reflection: 'Mantendu sistema eta antibirusa eguneratuta, ez ireki eranskin susmagarririk eta egin segurtasun-kopiak. Infekzioa susmatuz gero, deskonektatu gailua saretik, eskaneatu segurtasun-tresna batekin eta leheneratu kopia garbi batetik.',
+					principles: ['Osotasuna', 'Erabilgarritasuna']
+				},
+				'03': {
+					icon: '🎭',
+					reflection: 'Deskargatu programak iturri ofizialetatik eta aztertu baimenak. Troiar bat aurkituz gero, deskonektatu gailua saretik, aldatu bertan erabilitako pasahitzak beste gailu seguru batetik eta eskaneatu edo leheneratu sistema.',
+					principles: ['Konfidentzialtasuna', 'Osotasuna', 'Erabilgarritasuna', 'Autentifikazioa']
+				},
+				'04': {
+					icon: '🚪',
+					reflection: 'Eguneratu sistema eta softwarea, mugatu urruneko sarbidea eta aztertu kontu eta saio aktiboak. Atzeko ate bat aurkituz gero, isolatu gailua, baliogabetu kredentzialak eta eskatu segurtasun-taldeari sarbidea eta erregistroak ikuskatzeko.',
+					principles: ['Konfidentzialtasuna', 'Osotasuna', 'Erabilgarritasuna', 'Autentifikazioa']
+				},
+				'05': {
+					icon: '👁️',
+					reflection: 'Murriztu aplikazioen baimenak eta instalatu aplikazioak iturri fidagarrietatik. Espioitza susmatuz gero, erabili beste gailu seguru bat pasahitzak aldatzeko eta eskatu laguntza aditu bati gailua aztertu edo leheneratzeko.',
+					principles: ['Konfidentzialtasuna', 'Autentifikazioa']
+				},
+				'06': {
+					icon: '🗝️',
+					reflection: 'Ez gorde pasahitz guztiak nabigatzailean; erabili pasahitz-kudeatzaile bat eta MFA. Datuak lapurtu badizkizute, aldatu pasahitzak gailu garbi batetik, baliogabetu saio-tokenak eta jarri harremanetan bankuarekin zorro digitalak arriskuan badaude.',
+					principles: ['Konfidentzialtasuna', 'Autentifikazioa', 'Ez-gaitestea']
+				},
+				'07': {
+					icon: '🕸️',
+					reflection: 'Ez egin klik sare sozialetako mezu edo bideo-esteka susmagarrietan, eta egiaztatu aplikazioen baimenak. Kontua kutsatuz gero, aldatu pasahitza gailu seguru batetik, kendu saio ezezagunak eta ohartarazi kontaktuei.',
+					principles: ['Konfidentzialtasuna', 'Osotasuna', 'Autentifikazioa', 'Ez-gaitestea']
+				},
+				'08': {
+					icon: '🤖',
+					reflection: 'Aldatu bideratzailearen lehenetsitako pasahitza, eguneratu firmwarea eta desaktibatu behar ez diren urruneko zerbitzuak. Gailua botnet baten parte dela susmatuz gero, deskonektatu saretik eta berrezarri fabrikako ezarpenetara eguneratu ondoren.',
+					principles: ['Erabilgarritasuna']
+				},
+				'09': {
+					icon: '🔐',
+					reflection: 'Erabili pasahitz luze eta bakarrak, aktibatu MFA eta ezarri saio-hasierako saiakeren mugak. Sarrera susmagarria badago, aldatu pasahitza, amaitu saio guztiak eta egiaztatu kontuaren jarduera.',
+					principles: ['Autentifikazioa', 'Konfidentzialtasuna', 'Ez-gaitestea']
+				},
+				'10': {
+					icon: '🔒',
+					reflection: 'Egin segurtasun-kopiak sarera konektatu gabe, eguneratu sistema eta ez erabili babeskopiarik ez duen gailu partekaturik. Zifratzea susmatuz gero, isolatu gailua; ez konektatu kopiak eta jakinarazi IT edo segurtasun-taldeari.',
+					principles: ['Erabilgarritasuna', 'Osotasuna']
+				},
+				'11': {
+					icon: '🐴',
+					reflection: 'Deskargatu softwarea iturri ofizialetatik, begiratu fitxategiaren jatorria eta ez eman administratzaile-baimenik beharrezkoa ez denean. Troiarra aurkituz gero, isolatu gailua eta aldatu bertan erabilitako kredentzialak gailu garbi batetik.',
+					principles: ['Konfidentzialtasuna', 'Osotasuna', 'Erabilgarritasuna', 'Autentifikazioa']
+				},
+				'12': {
+					icon: '🌐',
+					reflection: 'Mantendu nabigatzailea eta sistema eguneratuta, eta erabili iragarki- eta deskarga-babesak. Gune bat bisitatu ondoren susmoa baduzu, deskonektatu saretik, eskaneatu gailua eta aldatu bertan erabilitako pasahitzak gailu seguru batetik.',
+					principles: ['Konfidentzialtasuna', 'Osotasuna', 'Erabilgarritasuna', 'Autentifikazioa']
+				},
+				'13': {
+					icon: '🪱',
+					reflection: 'Instalatu segurtasun-eguneratzeak garaiz eta desaktibatu behar ez diren partekatzeak. Harra sarean hedatzen ari bada, isolatu kutsatutako gailuak, jakinarazi administratzaileari eta berriro konektatu garbi daudela egiaztatu ondoren.',
+					principles: ['Osotasuna', 'Erabilgarritasuna']
+				},
+				'14': {
+					icon: '🖥️',
+					reflection: 'Aldatu gailuen lehenetsitako pasahitzak, eguneratu firmwarea eta isolatu Internetetik erabiltzen ez diren gailuak. Botnet batean egon daitezkeela susmatuz gero, isolatu, eguneratu edo berrezarri, eta egiaztatu sareko ezohiko trafikoa.',
+					principles: ['Erabilgarritasuna', 'Konfidentzialtasuna', 'Osotasuna']
+				},
+				'15': {
+					icon: '🚪',
+					reflection: 'Eguneratu sistema, erabili pasahitz sendoak eta mugatu urruneko administrazioa sare fidagarrietara. Sarbide ezkutu bat susmatuz gero, isolatu gailua, baliogabetu kontu eta gakoak, eta eskatu aditu bati sistema eta erregistroak aztertzeko.',
+					principles: ['Konfidentzialtasuna', 'Osotasuna', 'Erabilgarritasuna', 'Autentifikazioa']
+				}
+			};
+
 			document.querySelectorAll('.threat').forEach((card) => {
+				const cardNumber = card.querySelector('.number span').textContent.trim();
+				const guidance = cardGuidance[cardNumber];
+				if (guidance) {
+					const icon = document.createElement('span');
+					icon.className = 'card-icon';
+					icon.setAttribute('aria-hidden', 'true');
+					icon.textContent = guidance.icon;
+					card.querySelector('.number').append(icon);
+
+					const reflection = document.createElement('p');
+					reflection.className = 'reflection';
+					const reflectionLabel = document.createElement('strong');
+					reflectionLabel.textContent = 'Hausnarketa — zer egin? ';
+					reflection.append(reflectionLabel, document.createTextNode(guidance.reflection));
+
+					const impact = document.createElement('div');
+					impact.className = 'principle-impact';
+					const impactLabel = document.createElement('p');
+					const impactTitle = document.createElement('strong');
+					impactTitle.textContent = 'Kaltetutako helburuak (ohikoenak):';
+					impactLabel.append(impactTitle);
+					const tags = document.createElement('ul');
+					tags.className = 'principle-tags';
+					guidance.principles.forEach((principle) => {
+						const tag = document.createElement('li');
+						tag.className = 'principle-tag';
+						tag.textContent = principle;
+						tags.append(tag);
+					});
+					impact.append(impactLabel, tags);
+
+					const details = card.querySelector('.details');
+					const source = details.querySelector('.source');
+					details.insertBefore(reflection, source);
+					details.insertBefore(impact, source);
+				}
+
 				const selectCardGlow = () => {
 					const cardBounds = card.getBoundingClientRect();
 					const threats = card.closest('.threats');
@@ -553,11 +812,14 @@
 				const toggleCard = () => {
 					selectCardGlow();
 					activeCard = card;
-					modalNumber.textContent = card.querySelector('.number').textContent;
+					card.classList.add('is-open');
+					modalNumber.textContent = card.querySelector('.number > span').textContent;
 					modalTitle.textContent = card.querySelector('h3').textContent;
 					modalSummary.textContent = card.querySelector(':scope > p').textContent;
 					modalDetails.innerHTML = card.querySelector('.details').innerHTML;
-					modal.style.setProperty('--modal-color', getComputedStyle(card).backgroundColor);
+					const cardStyle = getComputedStyle(card);
+					modal.style.setProperty('--modal-color', cardStyle.backgroundColor || '#f8e2dc');
+					modal.style.setProperty('--modal-image', cardStyle.backgroundImage || 'none');
 					modalBackdrop.classList.add('is-visible');
 					modalBackdrop.setAttribute('aria-hidden', 'false');
 					document.body.classList.add('modal-open');
@@ -565,8 +827,12 @@
 					modalClose.focus();
 				};
 
-				card.addEventListener('click', toggleCard);
+				card.addEventListener('click', (event) => {
+					if (event.target.closest('a')) return;
+					toggleCard();
+				});
 				card.addEventListener('keydown', (event) => {
+					if (event.target.closest('a')) return;
 					if (event.key === 'Enter' || event.key === ' ') {
 						event.preventDefault();
 						toggleCard();
