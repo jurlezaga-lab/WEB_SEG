@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="eu">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Malware mota nagusien gida laburra euskaraz.">
+	<title>Malware Hiztegia | Julen</title>
+	<style>
+		:root {
+			--ink: #e7edf2;
+			--muted: #8b9aaa;
+			--line: #263747;
+			--paper: #1b1028;
+			--card: #111c27;
+			--accent: #58e6ba;
+			--accent-soft: #173d3a;
+			--warning: #ffcb70;
+		}
+
+		* { box-sizing: border-box; }
+
+		html { scroll-behavior: smooth; }
+
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: var(--paper);
+			font-family: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+			line-height: 1.6;
+			background-image: linear-gradient(rgba(88, 230, 186, .025) 1px, transparent 1px), linear-gradient(90deg, rgba(88, 230, 186, .025) 1px, transparent 1px);
+			background-size: 32px 32px;
+		}
+
+		.page {
+			width: min(1120px, calc(100% - 40px));
+			margin: 0 auto;
+		}
+
+		header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 28px 0 22px;
+			border-bottom: 1px solid var(--line);
+		}
+
+		.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--ink);
+    font-size: .8rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-decoration: none;
+    text-transform: uppercase;
+    
+    /* 1. Necesario para posicionar la línea respecto a este elemento */
+    position: relative; 
+}
+
+/* 2. Estilos base de la línea */
+.brand::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; /* Distancia de la línea al texto */
+    left: 0;
+    width: 0; /* Empieza oculta (ancho 0) */
+    height: 2px; /* Grosor de la línea (fina) */
+    background-color: currentColor; /* Usa el mismo color del texto */
+    transition: width 0.3s ease-in-out; /* Velocidad y suavidad de la animación */
+}
+
+/* 3. Efecto al pasar el ratón */
+.brand:hover::after {
+    width: 100%; /* La línea se expande de izquierda a derecha */
+}
+
+		.brand:hover, .brand:focus-visible { color: var(--accent); }
+
+		.brand-mark {
+			display: grid;
+			width: 25px;
+			height: 25px;
+			place-items: center;
+			color: var(--card);
+			background: var(--ink);
+			border-radius: 50%;
+			font-family: Georgia, serif;
+			font-size: .9rem;
+		}
+
+		nav a {
+			margin-left: 22px;
+			color: var(--muted);
+			font-size: .82rem;
+			text-decoration: none;
+		}
+
+		nav a:hover, nav a:focus-visible { color: var(--accent); }
+
+		.hero {
+			display: grid;
+			grid-template-columns: 1.2fr .8fr;
+			gap: 64px;
+			align-items: end;
+			padding: 86px 0 76px;
+		}
+
+		.eyebrow {
+			margin: 0 0 18px;
+			color: var(--accent);
+			font-size: .76rem;
+			font-weight: 800;
+			letter-spacing: .14em;
+			text-transform: uppercase;
+		}
+
+		h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+
+		h1 {
+			max-width: 700px;
+			margin: 0;
+			font-size: clamp(3rem, 7vw, 6.2rem);
+			letter-spacing: -.055em;
+			line-height: .94;
+			transition: color .3s ease, text-shadow .3s ease;
+		}
+
+		.hero h1:hover, .hero h1:focus-visible {
+			color: var(--accent);
+			text-shadow: 0 0 24px rgba(88, 230, 186, .2);
+		}
+
+		.hero-note {
+			max-width: 300px;
+			margin: 0 0 8px;
+			color: var(--muted);
+			font-size:1.2rem;
+		}
+
+		.hero-note strong { color: var(--ink); transition: color .3s ease; }
+		.hero-note:hover, .hero-note:focus-within,
+		.hero-note:hover strong, .hero-note:focus-within strong { color: var(--accent); }
+
+		.section-intro {
+			display: flex;
+			align-items: baseline;
+			justify-content: space-between;
+			padding: 18px 0;
+			border-top: 1px solid var(--ink);
+		}
+
+		.section-intro h2 { margin: 0; font-size: 1.8rem; }
+		.section-intro span { color: var(--muted); font-size: .82rem; }
+
+		.threats {
+			position: relative;
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 14px;
+			padding-bottom: 82px;
+		}
+
+		.threats::before {
+			position: absolute;
+			top: var(--glow-y, 50%);
+			left: var(--glow-x, 50%);
+			z-index: 0;
+			width: 270px;
+			height: 270px;
+			border-radius: 50%;
+			background: var(--glow-color, transparent);
+			box-shadow: 0 0 90px 60px var(--glow-color, transparent);
+			content: "";
+			opacity: 0;
+			pointer-events: none;
+			transform: translate(-50%, -50%);
+			filter: blur(34px);
+			transition: left .5s ease, top .5s ease, background .5s ease, box-shadow .5s ease, opacity .35s ease;
+		}
+
+		.threats.has-selection::before { opacity: .42; }
+
+		.threat {
+			position: relative;
+			z-index: 1;
+			min-height: 330px;
+			padding: 29px;
+			background: var(--card);
+			border: 1px solid var(--line);
+			border-radius: 6px;
+			cursor: pointer;
+			transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+		}
+
+		.threat:hover, .threat:focus-visible {
+			border-color: var(--ink);
+			box-shadow: 0 8px 18px rgba(24, 32, 29, .08);
+			transform: translateY(-4px);
+		}
+
+		.threat:focus-visible { outline: 3px solid rgba(24, 32, 29, .2); outline-offset: 3px; }
+
+		.topic-section + .topic-section {
+			margin-top: 42px;
+			padding-top: 18px;
+			border-top: 1px solid var(--line);
+		}
+
+		.topic-header {
+			display: flex;
+			align-items: baseline;
+			justify-content: space-between;
+			gap: 18px;
+			margin: 0 0 18px;
+			padding-top: 6px;
+		}
+
+		.topic-header h2 {
+			margin: 0;
+			font-size: 1.7rem;
+		}
+
+		.topic-header span {
+			color: var(--muted);
+			font-size: .82rem;
+		}
+
+		.threat.topic-malware:nth-child(1) { background: #f8e2dc; }
+		.threat.topic-malware:nth-child(2) { background: #dce9df; }
+		.threat.topic-malware:nth-child(3) { background: #e4e0f0; }
+		.threat.topic-malware:nth-child(4) { background: #f2e7c9; }
+		.threat.topic-malware:nth-child(5) { background: #dce8ef; }
+		.threat.topic-malware:nth-child(6) { background: #eee0d5; }
+		.threat.topic-network:nth-child(1) { background: #f4d5d1; }
+		.threat.topic-network:nth-child(2) { background: #dfeee5; }
+		.threat.topic-network:nth-child(3) { background: #dee8f7; }
+
+		.number {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 34px;
+			color: var(--muted);
+			font-size: .76rem;
+			font-weight: 800;
+			letter-spacing: .12em;
+		}
+
+		.question {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			color: #13202b;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: 4.2rem;
+			line-height: 1;
+			transform: translate(-50%, -42%);
+			transition: opacity .3s ease, transform .3s ease;
+		}
+
+		.threat h3, .threat p, .threat .details {
+			opacity: 0;
+			transform: translateY(8px);
+			visibility: hidden;
+		}
+
+		.threat h3 { margin: 0 0 10px; color: #0f1f2c; font-size: 1.55rem; transition: opacity .35s ease .08s, transform .35s ease .08s, visibility .35s; }
+		.threat p { margin: 0; color: #22313d; font-size: .92rem; transition: opacity .35s ease .14s, transform .35s ease .14s, visibility .35s; }
+		.details { margin-top: 18px; color: #22313d; font-size: .82rem; transition: opacity .35s ease .2s, transform .35s ease .2s, visibility .35s; }
+		.details p { margin: 0 0 10px; font-size: .82rem; }
+		.details strong { color: #13202b; }
+		.details ul { margin: 0; padding-left: 18px; }
+		.details li + li { margin-top: 4px; }
+
+		.threat.is-open .question { opacity: 0; transform: translate(-50%, -42%) scale(.7); }
+		.threat.is-open h3, .threat.is-open p, .threat.is-open .details { opacity: 1; transform: translateY(0); visibility: visible; }
+
+		.modal-backdrop {
+			display: grid;
+			position: fixed;
+			inset: 0;
+			z-index: 10;
+			place-items: center;
+			padding: 24px;
+			background: rgba(10, 17, 24, .78);
+			opacity: 0;
+			visibility: hidden;
+			transition: opacity .28s ease, visibility .28s ease;
+		}
+
+		.modal-backdrop.is-visible { opacity: 1; visibility: visible; }
+
+		.modal {
+			position: relative;
+			width: min(720px, 100%);
+			max-height: min(760px, calc(100vh - 48px));
+			overflow: auto;
+			padding: 42px;
+			color: #13202b;
+			background: var(--modal-color, #f8e2dc);
+			border: 1px solid rgba(19, 32, 43, .25);
+			border-radius: 8px;
+			box-shadow: 0 24px 80px rgba(0, 0, 0, .35);
+			transform: translateY(18px) scale(.97);
+			transition: transform .28s ease;
+		}
+
+		.modal-backdrop.is-visible .modal { transform: translateY(0) scale(1); }
+
+		.modal-number {
+			margin: 0 0 22px;
+			font-size: .76rem;
+			font-weight: 800;
+			letter-spacing: .12em;
+		}
+
+		.modal h2 { margin: 0 42px 12px 0; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1; }
+		.modal-summary { margin: 0; font-size: 1rem; }
+		.modal-details { margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(19, 32, 43, .25); font-size: .92rem; }
+		.modal-details p { margin: 0 0 16px; }
+		.modal-details ul { margin: 0; padding-left: 20px; }
+		.modal-details li + li { margin-top: 6px; }
+		.modal-details strong { color: #13202b; }
+
+		.modal-close {
+			position: absolute;
+			top: 18px;
+			right: 18px;
+			width: 36px;
+			height: 36px;
+			color: #13202b;
+			background: transparent;
+			border: 1px solid rgba(19, 32, 43, .35);
+			border-radius: 50%;
+			cursor: pointer;
+			font: inherit;
+			font-size: 1.3rem;
+			line-height: 1;
+		}
+
+		.modal-close:hover, .modal-close:focus-visible { background: rgba(19, 32, 43, .1); }
+		body.modal-open { overflow: hidden; }
+
+		footer {
+			display: flex;
+			justify-content: space-between;
+			padding: 22px 0 34px;
+			border-top: 1px solid var(--line);
+			color: var(--muted);
+			font-size: .78rem;
+		}
+
+		footer p { margin: 0; }
+		footer p:hover, footer p:focus-visible { color: var(--accent); }
+
+		@media (max-width: 760px) {
+			.page { width: min(100% - 28px, 560px); }
+			header { padding-top: 20px; }
+			nav { display: none; }
+			.hero { grid-template-columns: 1fr; gap: 30px; padding: 64px 0 56px; }
+			h1 { font-size: clamp(3.4rem, 16vw, 5.2rem); }
+			.hero-note { max-width: 420px; }
+			.threats { grid-template-columns: 1fr; padding-bottom: 56px; }
+			.threat { min-height: 290px; }
+			.number { margin-bottom: 26px; }
+			.modal { padding: 32px 24px; }
+			footer { display: block; }
+			footer p + p { margin-top: 6px; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			html { scroll-behavior: auto; }
+			.threat { transition: none; }
+			.threat h3, .threat p, .threat .details, .question { transition: none; }
+			.modal-backdrop, .modal { transition: none; }
+		}
+	</style>
+</head>
+<body>
+	<div class="page">
+		<header>
+			<a class="brand" href="#hasiera" aria-label="Web Segurtasunaren hasiera">
+				Web Segurtasuna
+			</a>
+		</header>
+
+		<main id="hasiera">
+			<section class="hero" aria-labelledby="orrialde-izenburua">
+				<div>
+					<h1 id="orrialde-izenburua">Malware<br>hiztegia</h1>
+				</div>
+				<p class="hero-note"><strong>Malwarea</strong> gailu edo sistema bati kalte egiteko, datuak lapurtzeko edo baimenik gabe sartzeko sortutako softwarea da.</p>
+			</section>
+
+			<section id="mehatxuak" aria-labelledby="mehatxu-izenburua">
+				<div class="topic-header">
+					<h2 id="mehatxu-izenburua">Malware motak</h2>
+					<span>Malwarearen azpitalde nagusiak</span>
+				</div>
+
+				<div class="threats">
+					<article class="threat topic-malware" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>01</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Phishinga</h3>
+						<p>Mezu edo web faltsuen bidez, erabiltzailea engainatu eta pasahitzak, bankuko datuak edo bestelako informazioa lortzeko iruzurra.</p>
+						<div class="details">
+						<p><strong>Gertakaria:</strong> 2013–2014ean, Google eta Facebook-ek 100 milioi dolarreko iruzur bat jasan zuten funtzionatzen zuten banku-faktura faltsuen phishing kampainaren bidez. Erasotzaileak benetako hornitzaileen itxura ematen zion mezu bati ere itxita zegoen.</p>
+						<strong>Eragiten dituen ezaugarriak:</strong>
+						<ul><li>Posta elektronikoa eta mezularitza</li><li>Saio-hasierak, banku-kontuak eta MFA kodeak</li></ul>
+						</div>
+					</article>
+
+					<article class="threat topic-malware" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>02</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Biren erasoa</h3>
+						<p>Birusa beste fitxategi edo programa bati itsasten zaio. Fitxategia irekitzean, hedatu eta sistema edo datuak kaltetu ditzake.</p>
+						<div class="details">
+						<p><strong>Gertakaria:</strong> 2000ko maiatzaren 4an, ILOVEYOU birusa zabaldu zen. E-posta mezu bati erantsitako .vbs fitxategia ireki zenean, 10 milioi ordenagailu inguru kutsatu ziren mundu mailan.</p>
+						<strong>Eragiten dituen ezaugarriak:</strong>
+						<ul><li>Fitxategiak eta e-mailak</li><li>Sistemaren errendimendua, fitxategien osotasuna eta datuak</li></ul>
+						</div>
+					</article>
+
+					<article class="threat topic-malware" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>03</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Troiarra</h3>
+						<p>Programa erabilgarri edo fidagarri baten itxura hartzen du, baina instalatzean ekintza kaltegarriak egiten ditu ezkutuan.</p>
+						<div class="details">
+						<p><strong>Gertakaria:</strong> 2021eko urtarrilean, Emotet troiarraren botneta atxilotu zuen FBIk. Troiarra dokumentuak, posta-zorroak eta sareko zerbitzuak erabiliz, pertsona eta erakunde askoren ordenagailuetan ezkutuan sartu zen.</p>
+							<strong>Eragiten dituen ezaugarriak:</strong>
+							<ul><li>Programen instalazioa eta baimenak</li><li>Fitxategiak, kontuak eta sare-konexioak</li></ul>
+						</div>
+					</article>
+
+					<article class="threat topic-malware" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>04</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Backdoorsak</h3>
+						<p>Sistema batean ezkutuko sarbidea sortzen dute. Horri esker, erasotzaile batek kontrola har dezake ohiko segurtasun-neurriak saihestuta.</p>
+						<div class="details">
+						<p><strong>Gertakaria:</strong> 2020ko abenduaren 8an aurkitu zen SolarWinds Orion softwarearen supply-chain ataka. Erasotzaileek backdoor bat txertatu zuten konpainiaren softwarearen eguneratzean, eta 18.000 bezero inguru kutsatu zituzten.</p>
+						<strong>Eragiten dituen ezaugarriak:</strong>
+						<ul><li>Urruneko sarbidea eta administrazio-kontrola</li><li>Sareko zerbitzuak, konfigurazioa eta eguneratzeak</li></ul>
+						</div>
+					</article>
+
+					<article class="threat topic-malware" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>05</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Spywarea</h3>
+						<p>Erabiltzailearen jarduera ezkutuan behatzen du: nabigazioa, teklatuaren erabilera edo bestelako datu pribatuak jaso ditzake.</p>
+						<div class="details">
+						<p><strong>Gertakaria:</strong> 2021eko uztailean, Pegasus spywareari buruzko azterlanek 50.000 telefono inguru infektatu zituela salatu zuten. Erasotzaileek teklatuaren jarduera, mezuak eta kokapena behatu ahal izan zituzten, kazetari, politikari eta aktibisten aurka.</p>
+						<strong>Eragiten dituen ezaugarriak:</strong>
+						<ul><li>Pribatutasuna eta nabigazio-historia</li><li>Mikrofonoa, kamera, mezuak eta teklatuaren jarduera</li></ul>
+						</div>
+					</article>
+
+					<article class="threat topic-malware" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>06</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Stealerrak</h3>
+						<p>Informazioa lapurtzeko diseinatuta daude, hala nola saio-hasierak, cookie-ak, kriptomoneta-zorroak edo gordetako pasahitzak.</p>
+						<div class="details">
+						<p><strong>Gertakaria:</strong> 2020ko maiatzean, RedLine Stealer malwarea zabaldu zen; pasahitzak, cookie-ak eta kriptomoneta-zorroak lapurtzeko diseinatuta zegoen. Erasotzaileek web-garbitokiak eta nabigatzaileak erabiltzen zituzten informazioa ateratzeko.</p>
+						<strong>Eragiten dituen ezaugarriak:</strong>
+						<ul><li>Nabigatzaileak, gordetako pasahitzak eta cookie-ak</li><li>Kriptomoneta-zorroak, sesio-tokenak eta kontu-datuak</li></ul>
+						</div>
+					</article>
+				</div>
+			</section>
+
+			<section class="topic-section" aria-labelledby="sare-mehatxu-izenburua">
+				<div class="topic-header">
+					<h2 id="sare-mehatxu-izenburua">Sareko mehatxuak</h2>
+					<span>Botnetak eta indar gordineko erasoak</span>
+				</div>
+				<div class="threats">
+					<article class="threat topic-network" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>07</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Koobface</h3>
+						<p>Facebook eta sare sozialetako erabiltzaileak infektatzeko sortutako malwarea izan zen, eta profilak kontrolatu, spam bidali eta pasahitzak lapurtu ahal zituen.</p>
+						<div class="details">
+						<p><strong>Gertakaria:</strong> 2008tik 2011ra, Koobface botnet-a sare sozialetan zabaldu zen, batez ere Facebooken. Erasotzaileek bidegabeko estekak eta faltsutako profilak erabili zituzten erabiltzaileak engainatzeko eta gailuak kutsatzeko.</p>
+						<strong>Eragiten dituen ezaugarriak:</strong>
+						<ul><li>Sare sozialak eta profilak</li><li>Pasahitzak, spam-a eta gailuen kontrola</li></ul>
+						</div>
+					</article>
+
+					<article class="threat topic-network" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>08</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Botnet</h3>
+						<p>Malwareak infektatutako ordenagailu edo gailuen sarea da, erasotzaileak urrunetik kontrolatu eta erabili ahal duena ekintzak egiteko.</p>
+						<div class="details">
+						<p><strong>Gertakaria:</strong> 2016an Mirai botnet-a agertu zen, Interneteko gailu ahulek (bideerradadoreak, kamarak, etab.) osatutako sareak eta zerbitzuen aurkako DDoS eraso masiboak egin zituen. Botnetek milaka gailu aldi berean elkartu zitzaketen erasoa koordinatzeko.</p>
+						<strong>Eragiten dituen ezaugarriak:</strong>
+						<ul><li>Interneteko gailuak eta ordenagailuak</li><li>DDoS erasoak, spam-a eta datuen lapurketa</li></ul>
+						</div>
+					</article>
+
+					<article class="threat topic-network" tabindex="0" role="button" aria-expanded="false">
+						<div class="number"><span>09</span></div>
+						<span class="question" aria-hidden="true">?</span>
+						<h3>Indar gordineko erasoa (Ataque de fuerza bruta)</h3>
+						<p>Erabiltzaile edo sistema baten pasahitza probatu eta aukera posible guztiak saiatu egiten dituen eraso mota da, maiz blokeatzeak edo muga fisikoak gainditzeko erabilita.</p>
+						<div class="details">
+						<p><strong>Gertakaria:</strong> 2023an, hainbat online zerbitzu eta aplikazioetan pasahitzak ordena ezberdinetan probatzen zituzten erasoak egon ziren. Jende askok ahulekotasun handia duten pasahitzak erabiltzen dituen kontuak arriskuan jartzen ditu, eta erasotzaileak asko probatzen ditu eskuzko lana saihesteko.</p>
+						<strong>Eragiten dituen ezaugarriak:</strong>
+						<ul><li>Pasahitzak eta identitateak</li><li>Kontuen hartzeak, sarreren lapurketa eta datu-ihesak</li></ul>
+						</div>
+					</article>
+				</div>
+			</section>
+		</main>
+		<div class="modal-backdrop" role="presentation" aria-hidden="true">
+			<section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+				<button class="modal-close" type="button" aria-label="Itxi" title="Itxi">&times;</button>
+				<p class="modal-number"></p>
+				<h2 id="modal-title"></h2>
+				<p class="modal-summary"></p>
+				<div class="modal-details"></div>
+			</section>
+		</div>
+		<script>
+			const modalBackdrop = document.querySelector('.modal-backdrop');
+			const modal = document.querySelector('.modal');
+			const modalClose = document.querySelector('.modal-close');
+			const modalNumber = document.querySelector('.modal-number');
+			const modalTitle = document.querySelector('#modal-title');
+			const modalSummary = document.querySelector('.modal-summary');
+			const modalDetails = document.querySelector('.modal-details');
+			let activeCard = null;
+
+			document.querySelectorAll('.threat').forEach((card) => {
+				const selectCardGlow = () => {
+					const cardBounds = card.getBoundingClientRect();
+					const threats = card.closest('.threats');
+					const threatsBounds = threats.getBoundingClientRect();
+
+					threats.style.setProperty('--glow-color', getComputedStyle(card).backgroundColor);
+					threats.style.setProperty('--glow-x', `${cardBounds.left - threatsBounds.left + cardBounds.width / 2}px`);
+					threats.style.setProperty('--glow-y', `${cardBounds.top - threatsBounds.top + cardBounds.height / 2}px`);
+					threats.classList.add('has-selection');
+				};
+
+				const toggleCard = () => {
+					selectCardGlow();
+					activeCard = card;
+					modalNumber.textContent = card.querySelector('.number').textContent;
+					modalTitle.textContent = card.querySelector('h3').textContent;
+					modalSummary.textContent = card.querySelector(':scope > p').textContent;
+					modalDetails.innerHTML = card.querySelector('.details').innerHTML;
+					modal.style.setProperty('--modal-color', getComputedStyle(card).backgroundColor);
+					modalBackdrop.classList.add('is-visible');
+					modalBackdrop.setAttribute('aria-hidden', 'false');
+					document.body.classList.add('modal-open');
+					card.setAttribute('aria-expanded', 'true');
+					modalClose.focus();
+				};
+
+				card.addEventListener('click', toggleCard);
+				card.addEventListener('keydown', (event) => {
+					if (event.key === 'Enter' || event.key === ' ') {
+						event.preventDefault();
+						toggleCard();
+					}
+				});
+			});
+
+			const closeModal = () => {
+			modalBackdrop.classList.remove('is-visible');
+			modalBackdrop.setAttribute('aria-hidden', 'true');
+			document.body.classList.remove('modal-open');
+			if (activeCard) {
+				activeCard.classList.add('is-open');
+				activeCard.setAttribute('aria-expanded', 'false');
+				activeCard.focus();
+			}
+			activeCard = null;
+		};
+
+			modalClose.addEventListener('click', closeModal);
+			modalBackdrop.addEventListener('click', (event) => {
+				if (event.target === modalBackdrop) closeModal();
+			});
+			document.addEventListener('keydown', (event) => {
+				if (event.key === 'Escape' && modalBackdrop.classList.contains('is-visible')) closeModal();
+			});
+		</script>
+
+		<footer id="oin-oharra">
+			<p>Web Segurtasuna · Malware Hiztegia</p>
+			<p>Julen Urlezaga S.L</p>
+		</footer>
+	</div>
+</body>
+</html>
