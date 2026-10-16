@@ -638,10 +638,6 @@
 					</article>
 				</div>
 			</section>
-<<<<<<< HEAD
-=======
-
->>>>>>> a0b6f144d15dfac7d477ffd0780cdfcede07fb63
 			<section class="topic-section" aria-labelledby="ud3a2-izenburua">
 				<div class="topic-header">
 					<h2 id="ud3a2-izenburua">UD3A2</h2>
@@ -657,10 +653,7 @@
 							<p><strong>Nola hedatzen dira:</strong> Deskarga susmagarrien, P2P fitxategien, eranskin edo esteken eta eguneratu gabeko aplikazioen bidez.</p>
 							<strong>Ezaugarriak eta babesa:</strong>
 							<ul><li>Informazioa lapurtu edo urruneko aginduak exekuta ditzakete.</li><li>Erabili antibirus eguneratua eta suebakia; deskargatu softwarea iturri ofizialetatik eta eguneratu sistema.</li></ul>
-<<<<<<< HEAD
 							<p class="source"><strong>Iturria:</strong> <a href="https://csrc.nist.gov/glossary/term/trojan_horse" target="_blank" rel="noopener noreferrer">NIST: troiarra</a></p>
-=======
->>>>>>> a0b6f144d15dfac7d477ffd0780cdfcede07fb63
 						</div>
 					</article>
 
@@ -686,10 +679,7 @@
 							<p><strong>Eraginak:</strong> Atakak ireki, segurtasun-prozesuak amaitu, fitxategiak deskargatu edo sistema abiaraztean berriro exekutatzeko konfigurazioa alda dezake.</p>
 							<strong>Ezaugarriak eta babesa:</strong>
 							<ul><li>Baliteke sistema moteltzea, huts egitea edo fitxategiak ustekabean agertzea edo desagertzea.</li><li>Instalatu segurtasun-eguneratzeak, mantendu antibirusa eta suebakia eguneratuta, eta kontuz ibili USBekin eta eranskinekin.</li></ul>
-<<<<<<< HEAD
 							<p class="source"><strong>Iturria:</strong> <a href="https://csrc.nist.gov/glossary/term/worm" target="_blank" rel="noopener noreferrer">NIST: harra (worm)</a></p>
-=======
->>>>>>> a0b6f144d15dfac7d477ffd0780cdfcede07fb63
 						</div>
 					</article>
 
@@ -702,10 +692,7 @@
 							<p><strong>Erabilerak:</strong> Spam-a bidaltzea, phishinga edo malwarea zabaltzea eta DDoS erasoak egitea. Gailuak kontrol-zentroarekin IRC, HTTP edo P2P bidez komunika daitezke.</p>
 							<strong>Ezaugarriak eta babesa:</strong>
 							<ul><li>Internet motelagoa edo bidali gabeko mezuen erantzunak izan daitezke zantzuak.</li><li>Eguneratu sistema eta nabigatzailea, erabili antibirusa eta suebakia, eta saihestu crackak eta iturri ezezaguneko deskargak.</li></ul>
-<<<<<<< HEAD
 							<p class="source"><strong>Iturria:</strong> <a href="https://www.cloudflare.com/learning/ddos/glossary/botnet/" target="_blank" rel="noopener noreferrer">Cloudflare: zer da botnet bat?</a></p>
-=======
->>>>>>> a0b6f144d15dfac7d477ffd0780cdfcede07fb63
 						</div>
 					</article>
 
@@ -718,10 +705,7 @@
 							<p><strong>Eraginak:</strong> Erasotzaileak programak exekutatu, konfigurazioa aldatu, fitxategiak edo pasahitzak lapurtu eta gailua urrunetik kontrola dezake.</p>
 							<strong>Ezaugarriak eta babesa:</strong>
 							<ul><li>Eranskin, deskarga susmagarri, software zaharkitu, pasahitz ahul edo irekita dauden sare-ataken bidez baliatu daitezke.</li><li>Eguneratu sistema, erabili pasahitz sendoak, mugatu erabiltzaile-baimenak eta mantendu suebakia aktibatuta.</li></ul>
-<<<<<<< HEAD
 							<p class="source"><strong>Iturria:</strong> <a href="https://csrc.nist.gov/glossary/term/backdoor" target="_blank" rel="noopener noreferrer">NIST: atzeko atea (backdoor)</a></p>
-=======
->>>>>>> a0b6f144d15dfac7d477ffd0780cdfcede07fb63
 						</div>
 					</article>
 				</div>
@@ -746,7 +730,6 @@
 			const modalDetails = document.querySelector('.modal-details');
 			let activeCard = null;
 
-<<<<<<< HEAD
 			const cardGuidance = {
 				'01': {
 					icon: '🎣',
@@ -863,9 +846,6 @@
 					details.insertBefore(impact, source);
 				}
 
-=======
-			document.querySelectorAll('.threat').forEach((card) => {
->>>>>>> a0b6f144d15dfac7d477ffd0780cdfcede07fb63
 				const selectCardGlow = () => {
 					const cardBounds = card.getBoundingClientRect();
 					const threats = card.closest('.threats');
@@ -881,11 +861,7 @@
 					selectCardGlow();
 					activeCard = card;
 					card.classList.add('is-open');
-<<<<<<< HEAD
 					modalNumber.textContent = card.querySelector('.number > span').textContent;
-=======
-					modalNumber.textContent = card.querySelector('.number').textContent;
->>>>>>> a0b6f144d15dfac7d477ffd0780cdfcede07fb63
 					modalTitle.textContent = card.querySelector('h3').textContent;
 					modalSummary.textContent = card.querySelector(':scope > p').textContent;
 					modalDetails.innerHTML = card.querySelector('.details').innerHTML;
@@ -899,17 +875,12 @@
 					modalClose.focus();
 				};
 
-<<<<<<< HEAD
 				card.addEventListener('click', (event) => {
 					if (event.target.closest('a')) return;
 					toggleCard();
 				});
 				card.addEventListener('keydown', (event) => {
 					if (event.target.closest('a')) return;
-=======
-				card.addEventListener('click', toggleCard);
-				card.addEventListener('keydown', (event) => {
->>>>>>> a0b6f144d15dfac7d477ffd0780cdfcede07fb63
 					if (event.key === 'Enter' || event.key === ' ') {
 						event.preventDefault();
 						toggleCard();
