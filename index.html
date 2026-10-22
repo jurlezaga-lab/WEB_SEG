@@ -90,8 +90,14 @@
 			font-size: .9rem;
 		}
 
+		nav {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+			gap: 8px 22px;
+		}
+
 		nav a {
-			margin-left: 22px;
 			color: var(--muted);
 			font-size: .82rem;
 			text-decoration: none;
@@ -300,8 +306,8 @@
 		.reflection { margin-top: 14px !important; padding: 12px; background: rgba(255, 255, 255, .35); border-left: 3px solid #16735d; }
 		.principle-impact { margin: 14px 0; }
 		.principle-impact > p { margin-bottom: 8px; }
-		.principle-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
-		.principle-tag { padding: 3px 8px; color: #13202b; background: rgba(255, 255, 255, .52); border: 1px solid rgba(19, 32, 43, .22); border-radius: 999px; font-size: .72rem; }
+		.principle-explanations { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+		.principle-explanations li { padding: 7px 9px; background: rgba(255, 255, 255, .4); border-left: 2px solid rgba(19, 32, 43, .35); font-size: .76rem; }
 		.source { margin-top: 16px !important; padding-top: 12px; border-top: 1px solid rgba(19, 32, 43, .2); }
 		.source a { color: #13202b; font-weight: 700; text-underline-offset: 3px; }
 		.source a:hover, .source a:focus-visible { color: #075b49; }
@@ -390,8 +396,8 @@
 
 		@media (max-width: 760px) {
 			.page { width: min(100% - 28px, 560px); }
-			header { padding-top: 20px; }
-			nav { display: none; }
+			header { align-items: flex-start; flex-direction: column; gap: 18px; padding-top: 20px; }
+			nav { justify-content: flex-start; gap: 8px 16px; }
 			.hero { grid-template-columns: 1fr; gap: 30px; padding: 64px 0 56px; }
 			h1 { font-size: clamp(3.4rem, 16vw, 5.2rem); }
 			.hero-note { max-width: 420px; }
@@ -417,6 +423,12 @@
 			<a class="brand" href="#hasiera" aria-label="Web Segurtasunaren hasiera">
 				Web Segurtasuna
 			</a>
+			<nav aria-label="Atalen menua">
+				<a href="#mehatxuak">Malware motak</a>
+				<a href="#sare-mehatxuak">Sareko mehatxuak</a>
+				<a href="#ud3a1">UD3A1</a>
+				<a href="#ud3a2">UD3A2</a>
+			</nav>
 		</header>
 
 		<main id="hasiera">
@@ -522,7 +534,7 @@
 				</div>
 			</section>
 
-			<section class="topic-section" aria-labelledby="sare-mehatxu-izenburua">
+			<section id="sare-mehatxuak" class="topic-section" aria-labelledby="sare-mehatxu-izenburua">
 				<div class="topic-header">
 					<h2 id="sare-mehatxu-izenburua">Sareko mehatxuak</h2>
 					<span>Botnetak eta indar gordineko erasoak</span>
@@ -570,7 +582,7 @@
 				</div>
 			</section>
 
-			<section class="topic-section" aria-labelledby="ud3a1-izenburua">
+			<section id="ud3a1" class="topic-section" aria-labelledby="ud3a1-izenburua">
 				<div class="topic-header">
 					<h2 id="ud3a1-izenburua">UD3A1</h2>
 					<span>Eraso informatiko esanguratsua</span>
@@ -590,7 +602,7 @@
 					</article>
 				</div>
 			</section>
-			<section class="topic-section" aria-labelledby="ud3a2-izenburua">
+			<section id="ud3a2" class="topic-section" aria-labelledby="ud3a2-izenburua">
 				<div class="topic-header">
 					<h2 id="ud3a2-izenburua">UD3A2</h2>
 					<span>Malware motak, ezaugarriak eta babesa</span>
@@ -686,77 +698,137 @@
 				'01': {
 					icon: '🎣',
 					reflection: 'Egiaztatu igorlearen helbidea eta webgunearen URLa, eta ez eman pasahitzik edo MFA koderik mezu bidez. Datuak eman badituzu, aldatu pasahitza gailu fidagarri batetik, itxi saioak eta jarri harremanetan bankuarekin edo erakundearen IT taldearekin.',
-					principles: ['Konfidentzialtasuna', 'Autentifikazioa', 'Ez-gaitestea']
+					principles: [
+						{ name: 'Konfidentzialtasuna', reason: 'Engainuak pasahitzak, MFA kodeak edo bankuko datu pribatuak agerian uztea bilatzen du.' },
+						{ name: 'Autentifikazioa', reason: 'Lapurtutako kredentzialekin, erasotzaileak biktimaren identitatea ordezka dezake.' },
+						{ name: 'Ez-gaitestea', reason: 'Lapurtutako kontutik egindako ekintzak biktimari egotz dakizkioke, nahiz eta erasotzaileak egin.' }
+					]
 				},
 				'02': {
 					icon: '🦠',
 					reflection: 'Mantendu sistema eta antibirusa eguneratuta, ez ireki eranskin susmagarririk eta egin segurtasun-kopiak. Infekzioa susmatuz gero, deskonektatu gailua saretik, eskaneatu segurtasun-tresna batekin eta leheneratu kopia garbi batetik.',
-					principles: ['Osotasuna', 'Erabilgarritasuna']
+					principles: [
+						{ name: 'Osotasuna', reason: 'Birusak fitxategiak aldatu, hondatu edo ezaba ditzake.' },
+						{ name: 'Erabilgarritasuna', reason: 'Infekzioak baliabideak agortu edo sistema eta fitxategiak erabiltezin bihur ditzake.' }
+					]
 				},
 				'03': {
 					icon: '🎭',
 					reflection: 'Deskargatu programak iturri ofizialetatik eta aztertu baimenak. Troiar bat aurkituz gero, deskonektatu gailua saretik, aldatu bertan erabilitako pasahitzak beste gailu seguru batetik eta eskaneatu edo leheneratu sistema.',
-					principles: ['Konfidentzialtasuna', 'Osotasuna', 'Erabilgarritasuna', 'Autentifikazioa']
+					principles: [
+						{ name: 'Konfidentzialtasuna', reason: 'Ezkutuan exekutatutako funtzioek datuak edo kredentzialak kanpora bidal ditzakete.' },
+						{ name: 'Osotasuna', reason: 'Troiarrak fitxategiak edo sistemaren konfigurazioa aldatu ditzake.' },
+						{ name: 'Erabilgarritasuna', reason: 'Karga maltzurrak sistema moteldu, blokeatu edo zerbitzuak eten ditzake.' },
+						{ name: 'Autentifikazioa', reason: 'Lapurtutako kredentzialek erasotzaileari erabiltzaile gisa saioa hasteko aukera ematen diote.' }
+					]
 				},
 				'04': {
 					icon: '🚪',
 					reflection: 'Eguneratu sistema eta softwarea, mugatu urruneko sarbidea eta aztertu kontu eta saio aktiboak. Atzeko ate bat aurkituz gero, isolatu gailua, baliogabetu kredentzialak eta eskatu segurtasun-taldeari sarbidea eta erregistroak ikuskatzeko.',
-					principles: ['Konfidentzialtasuna', 'Osotasuna', 'Erabilgarritasuna', 'Autentifikazioa']
+					principles: [
+						{ name: 'Konfidentzialtasuna', reason: 'Ezkutuko sarbideak baimenik gabeko irakurketa eta datu-lapurreta ahalbidetzen ditu.' },
+						{ name: 'Osotasuna', reason: 'Sarbide horrekin, erasotzaileak fitxategiak eta konfigurazioa alda ditzake.' },
+						{ name: 'Erabilgarritasuna', reason: 'Erasotzaileak zerbitzuak geldiarazi edo sistema blokeatu dezake.' },
+						{ name: 'Autentifikazioa', reason: 'Atzeko ateak ohiko egiaztapenak saihesten ditu, eta sarbidea ez du erabiltzaile legitimo batek autentifikatzen.' }
+					]
 				},
 				'05': {
 					icon: '👁️',
 					reflection: 'Murriztu aplikazioen baimenak eta instalatu aplikazioak iturri fidagarrietatik. Espioitza susmatuz gero, erabili beste gailu seguru bat pasahitzak aldatzeko eta eskatu laguntza aditu bati gailua aztertu edo leheneratzeko.',
-					principles: ['Konfidentzialtasuna', 'Autentifikazioa']
+					principles: [
+						{ name: 'Konfidentzialtasuna', reason: 'Spywareak nabigazioa, mezuak, teklatua edo mikrofono eta kamerako datuak ezkutuan jaso ditzake.' },
+						{ name: 'Autentifikazioa', reason: 'Jasotako pasahitz edo saio-datuekin, erasotzaileak biktimaren kontuetan sar daiteke.' }
+					]
 				},
 				'06': {
 					icon: '🗝️',
 					reflection: 'Ez gorde pasahitz guztiak nabigatzailean; erabili pasahitz-kudeatzaile bat eta MFA. Datuak lapurtu badizkizute, aldatu pasahitzak gailu garbi batetik, baliogabetu saio-tokenak eta jarri harremanetan bankuarekin zorro digitalak arriskuan badaude.',
-					principles: ['Konfidentzialtasuna', 'Autentifikazioa', 'Ez-gaitestea']
+					principles: [
+						{ name: 'Konfidentzialtasuna', reason: 'Stealerrak pasahitzak, cookieak, tokenak eta zorroetako datuak kopiatzen ditu.' },
+						{ name: 'Autentifikazioa', reason: 'Lapurtutako pasahitz eta tokenek kontuetan biktima balitz bezala sartzea ahalbidetzen dute.' },
+						{ name: 'Ez-gaitestea', reason: 'Kredentzial lapurtuekin egindako ekintzak kontuaren jabeari egotz dakizkioke.' }
+					]
 				},
 				'07': {
 					icon: '🕸️',
 					reflection: 'Ez egin klik sare sozialetako mezu edo bideo-esteka susmagarrietan, eta egiaztatu aplikazioen baimenak. Kontua kutsatuz gero, aldatu pasahitza gailu seguru batetik, kendu saio ezezagunak eta ohartarazi kontaktuei.',
-					principles: ['Konfidentzialtasuna', 'Osotasuna', 'Autentifikazioa', 'Ez-gaitestea']
+					principles: [
+						{ name: 'Konfidentzialtasuna', reason: 'Koobfacek kontuko datuak edo kontaktuen informazioa eskuratu ditzake.' },
+						{ name: 'Osotasuna', reason: 'Infektatutako kontutik mezuak edo esteka maltzurrak bidal daitezke erabiltzailearen izenean.' },
+						{ name: 'Autentifikazioa', reason: 'Kontuaren sarbidea hartuta, erasotzaileak benetako erabiltzailea dela itxura egin dezake.' },
+						{ name: 'Ez-gaitestea', reason: 'Kontutik zabaldutako edukia kontuaren jabeari egotz dakioke, hark bidali ez arren.' }
+					]
 				},
 				'08': {
 					icon: '🤖',
 					reflection: 'Aldatu bideratzailearen lehenetsitako pasahitza, eguneratu firmwarea eta desaktibatu behar ez diren urruneko zerbitzuak. Gailua botnet baten parte dela susmatuz gero, deskonektatu saretik eta berrezarri fabrikako ezarpenetara eguneratu ondoren.',
-					principles: ['Erabilgarritasuna']
+					principles: [
+						{ name: 'Erabilgarritasuna', reason: 'Botnetak gailuaren baliabideak erabil ditzake edo DDoS bidez sare eta zerbitzuak gainezka bete.' }
+					]
 				},
 				'09': {
 					icon: '🔐',
 					reflection: 'Erabili pasahitz luze eta bakarrak, aktibatu MFA eta ezarri saio-hasierako saiakeren mugak. Sarrera susmagarria badago, aldatu pasahitza, amaitu saio guztiak eta egiaztatu kontuaren jarduera.',
-					principles: ['Autentifikazioa', 'Konfidentzialtasuna', 'Ez-gaitestea']
+					principles: [
+						{ name: 'Autentifikazioa', reason: 'Pasahitza asmatuz gero, erasotzaileak kontua benetako erabiltzaile gisa ireki dezake.' },
+						{ name: 'Konfidentzialtasuna', reason: 'Kontuan sartzeak babestutako mezuak, fitxategiak edo datuak irakurtzeko aukera ematen du.' },
+						{ name: 'Ez-gaitestea', reason: 'Kontu arriskutsutik egindako ekintzak jabeari egotz dakizkioke.' }
+					]
 				},
 				'10': {
 					icon: '🔒',
 					reflection: 'Egin segurtasun-kopiak sarera konektatu gabe, eguneratu sistema eta ez erabili babeskopiarik ez duen gailu partekaturik. Zifratzea susmatuz gero, isolatu gailua; ez konektatu kopiak eta jakinarazi IT edo segurtasun-taldeari.',
-					principles: ['Erabilgarritasuna', 'Osotasuna']
+					principles: [
+						{ name: 'Erabilgarritasuna', reason: 'WannaCryk fitxategiak zifratzen dituenez, erabiltzaileak ezin ditu ireki edo zerbitzuak erabili.' },
+						{ name: 'Osotasuna', reason: 'Fitxategien edukia zifratu eta aldatzen du, eta horrek jatorrizko egoera fidagarria galtzea dakar.' }
+					]
 				},
 				'11': {
 					icon: '🐴',
 					reflection: 'Deskargatu softwarea iturri ofizialetatik, begiratu fitxategiaren jatorria eta ez eman administratzaile-baimenik beharrezkoa ez denean. Troiarra aurkituz gero, isolatu gailua eta aldatu bertan erabilitako kredentzialak gailu garbi batetik.',
-					principles: ['Konfidentzialtasuna', 'Osotasuna', 'Erabilgarritasuna', 'Autentifikazioa']
+					principles: [
+						{ name: 'Konfidentzialtasuna', reason: 'Troiarrak fitxategiak edo pasahitzak lapurtu eta erasotzaileari bidal diezazkioke.' },
+						{ name: 'Osotasuna', reason: 'Ezkutuko aginduek fitxategiak edo sistemaren ezarpenak aldatu ditzakete.' },
+						{ name: 'Erabilgarritasuna', reason: 'Troiarraren jarduerak sistema moteldu, blokeatu edo baliabideak agortu ditzake.' },
+						{ name: 'Autentifikazioa', reason: 'Lapurtutako kredentzialek erabiltzailearen kontuetan sartzea ahalbidetzen dute.' }
+					]
 				},
 				'12': {
 					icon: '🌐',
 					reflection: 'Mantendu nabigatzailea eta sistema eguneratuta, eta erabili iragarki- eta deskarga-babesak. Gune bat bisitatu ondoren susmoa baduzu, deskonektatu saretik, eskaneatu gailua eta aldatu bertan erabilitako pasahitzak gailu seguru batetik.',
-					principles: ['Konfidentzialtasuna', 'Osotasuna', 'Erabilgarritasuna', 'Autentifikazioa']
+					principles: [
+						{ name: 'Konfidentzialtasuna', reason: 'Deskargatutako malwareak nabigazioko edo gailuko datu pribatuak kanpora bidal ditzake.' },
+						{ name: 'Osotasuna', reason: 'Ahultasuna ustiatuta, malwareak fitxategiak edo sistemaren konfigurazioa alda ditzake.' },
+						{ name: 'Erabilgarritasuna', reason: 'Malwareak baliabideak kontsumitu edo sistema eta aplikazioak blokeatu ditzake.' },
+						{ name: 'Autentifikazioa', reason: 'Malwareak pasahitzak edo saio-tokenak lapurtuz gero, erasotzaileak erabiltzailea ordezka dezake.' }
+					]
 				},
 				'13': {
 					icon: '🪱',
 					reflection: 'Instalatu segurtasun-eguneratzeak garaiz eta desaktibatu behar ez diren partekatzeak. Harra sarean hedatzen ari bada, isolatu kutsatutako gailuak, jakinarazi administratzaileari eta berriro konektatu garbi daudela egiaztatu ondoren.',
-					principles: ['Osotasuna', 'Erabilgarritasuna']
+					principles: [
+						{ name: 'Osotasuna', reason: 'Harrek fitxategiak eta sistemaren konfigurazioa alda edo hondatu ditzakete.' },
+						{ name: 'Erabilgarritasuna', reason: 'Azkar hedatzeak sareko baliabideak agortu eta gailuak edo zerbitzuak moteldu edo geldiaraz ditzake.' }
+					]
 				},
 				'14': {
 					icon: '🖥️',
 					reflection: 'Aldatu gailuen lehenetsitako pasahitzak, eguneratu firmwarea eta isolatu Internetetik erabiltzen ez diren gailuak. Botnet batean egon daitezkeela susmatuz gero, isolatu, eguneratu edo berrezarri, eta egiaztatu sareko ezohiko trafikoa.',
-					principles: ['Erabilgarritasuna', 'Konfidentzialtasuna', 'Osotasuna']
+					principles: [
+						{ name: 'Erabilgarritasuna', reason: 'Gailuaren baliabideak DDoS edo beste agindu maltzur batzuetarako erabiltzen dira, eta zerbitzuak eten daitezke.' },
+						{ name: 'Konfidentzialtasuna', reason: 'Botnetaren kontrolatzaileak gailuko datuak eskuratu edo kanpora atera ditzake.' },
+						{ name: 'Osotasuna', reason: 'Urruneko aginduek fitxategiak, ezarpenak edo gailuaren funtzionamendua alda ditzakete.' }
+					]
 				},
 				'15': {
 					icon: '🚪',
 					reflection: 'Eguneratu sistema, erabili pasahitz sendoak eta mugatu urruneko administrazioa sare fidagarrietara. Sarbide ezkutu bat susmatuz gero, isolatu gailua, baliogabetu kontu eta gakoak, eta eskatu aditu bati sistema eta erregistroak aztertzeko.',
-					principles: ['Konfidentzialtasuna', 'Osotasuna', 'Erabilgarritasuna', 'Autentifikazioa']
+					principles: [
+						{ name: 'Konfidentzialtasuna', reason: 'Ezkutuko sarbideak erasotzaileari datu pribatuak irakurtzeko edo lapurtzeko aukera ematen dio.' },
+						{ name: 'Osotasuna', reason: 'Sarbidearekin, erasotzaileak fitxategiak, kontuak edo sistemaren ezarpenak alda ditzake.' },
+						{ name: 'Erabilgarritasuna', reason: 'Erasotzaileak zerbitzuak geldiarazi edo gailua blokeatu dezake.' },
+						{ name: 'Autentifikazioa', reason: 'Atzeko ateak autentifikazio arrunta saihesten du, eta erabiltzaile legitimoa identifikatu gabe uzten du sarbidea.' }
+					]
 				}
 			};
 
@@ -780,17 +852,18 @@
 					impact.className = 'principle-impact';
 					const impactLabel = document.createElement('p');
 					const impactTitle = document.createElement('strong');
-					impactTitle.textContent = 'Kaltetutako helburuak (ohikoenak):';
+					impactTitle.textContent = 'Kaltetutako helburuak (ohikoenak) eta zergatik:';
 					impactLabel.append(impactTitle);
-					const tags = document.createElement('ul');
-					tags.className = 'principle-tags';
-					guidance.principles.forEach((principle) => {
-						const tag = document.createElement('li');
-						tag.className = 'principle-tag';
-						tag.textContent = principle;
-						tags.append(tag);
+					const explanations = document.createElement('ul');
+					explanations.className = 'principle-explanations';
+					guidance.principles.forEach(({ name, reason }) => {
+						const item = document.createElement('li');
+						const principle = document.createElement('strong');
+						principle.textContent = `${name}: `;
+						item.append(principle, document.createTextNode(reason));
+						explanations.append(item);
 					});
-					impact.append(impactLabel, tags);
+					impact.append(impactLabel, explanations);
 
 					const details = card.querySelector('.details');
 					const source = details.querySelector('.source');
